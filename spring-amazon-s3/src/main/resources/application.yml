@@ -21,6 +21,6 @@ spring:
 
 #amazonProperties:
 #  endpointUrl: https://s3.ap-southeast-1.amazonaws.com
-#  accessKey: AKIASG7VURYJA6ELXKEX
-#  secretKey: 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
+#  accessKey: xxx
+#  secretKey: xxx
 #  bucketName: bucket-second
