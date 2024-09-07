@@ -1,6 +1,6 @@
-package com.txt.springamazon.repositories;
+package com.txt.aws.s3.repository;
 
-import com.txt.springamazon.domain.Todo;
+import com.txt.aws.s3.entity.Todo;
 import org.springframework.data.repository.CrudRepository;
 
 public interface TodoRepository extends CrudRepository<Todo, Long> {

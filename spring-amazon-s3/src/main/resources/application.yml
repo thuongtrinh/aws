@@ -19,8 +19,9 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 
-#amazonProperties:
-#  endpointUrl: https://s3.ap-southeast-1.amazonaws.com
-#  accessKey: xxx
-#  secretKey: xxx
-#  bucketName: bucket-second
+aws:
+  s3:
+    endpointUrl: https://s3.ap-southeast-1.amazonaws.com
+    accessKey: accessKey_value
+    secretKey: secretKey_value
+    bucketName: bucket-second

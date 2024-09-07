@@ -1,7 +1,7 @@
-package com.txt.springamazon.controllers;
+package com.txt.aws.s3.controller;
 
-import com.txt.springamazon.domain.Todo;
-import com.txt.springamazon.service.TodoService;
+import com.txt.aws.s3.entity.Todo;
+import com.txt.aws.s3.service.TodoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,12 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.InputStream;
 import java.util.List;
 
 @RestController

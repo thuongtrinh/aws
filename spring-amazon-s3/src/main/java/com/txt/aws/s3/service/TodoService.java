@@ -1,6 +1,6 @@
-package com.txt.springamazon.service;
+package com.txt.aws.s3.service;
 
-import com.txt.springamazon.domain.Todo;
+import com.txt.aws.s3.entity.Todo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

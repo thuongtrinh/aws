@@ -1,8 +1,10 @@
-package com.txt.springamazon.service;
+package com.txt.aws.s3.service.impl;
 
-import com.txt.springamazon.config.BucketName;
-import com.txt.springamazon.domain.Todo;
-import com.txt.springamazon.repositories.TodoRepository;
+import com.txt.aws.s3.repository.TodoRepository;
+import com.txt.aws.s3.config.BucketName;
+import com.txt.aws.s3.entity.Todo;
+import com.txt.aws.s3.service.FileStore;
+import com.txt.aws.s3.service.TodoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,4 +1,4 @@
-package com.txt.springamazon.config;
+package com.txt.aws.s3.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

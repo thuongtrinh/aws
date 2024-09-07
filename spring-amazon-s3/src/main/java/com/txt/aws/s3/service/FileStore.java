@@ -1,4 +1,4 @@
-package com.txt.springamazon.service;
+package com.txt.aws.s3.service;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;

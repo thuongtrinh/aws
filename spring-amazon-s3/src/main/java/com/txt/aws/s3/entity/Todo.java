@@ -1,11 +1,11 @@
-package com.txt.springamazon.domain;
+package com.txt.aws.s3.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
