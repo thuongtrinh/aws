@@ -1,12 +1,15 @@
 package com.txt.aws.s3.service;
 
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
-import lombok.AllArgsConstructor;
+import com.txt.aws.s3.dto.ObjectRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -14,8 +17,8 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class FileStore {
 
     private final AmazonS3 amazonS3;
@@ -48,4 +51,19 @@ public class FileStore {
         }
     }
 
+    public Boolean deleteObject(ObjectRequest objectRequest) {
+        String bucket_name = objectRequest.getBucketName();
+        String object_key = objectRequest.getObjectName();
+        System.out.format("Deleting object %s from S3 bucket: %s\n", object_key, bucket_name);
+        // final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.DEFAULT_REGION).build();
+        try {
+            amazonS3.deleteObject(bucket_name, object_key);
+        } catch (AmazonServiceException e) {
+            System.err.println(e.getErrorMessage());
+            //System.exit(1);
+            return false;
+        }
+        System.out.println("Done!");
+        return true;
+    }
 }

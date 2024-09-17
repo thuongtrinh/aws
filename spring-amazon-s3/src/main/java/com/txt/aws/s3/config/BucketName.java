@@ -6,6 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum BucketName {
-    TODO_IMAGE("bucket-second");
+    TODO_IMAGE("txtlab-bucket");
+
     private final String bucketName;
 }

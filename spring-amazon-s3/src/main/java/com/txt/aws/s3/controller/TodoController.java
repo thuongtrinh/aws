@@ -1,8 +1,10 @@
 package com.txt.aws.s3.controller;
 
+import com.txt.aws.s3.dto.ObjectRequest;
 import com.txt.aws.s3.entity.Todo;
 import com.txt.aws.s3.service.TodoService;
-import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,14 +15,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/todo")
-@AllArgsConstructor
 @CrossOrigin("*")
+@Tag(name = "Todo Controller")
+@RequiredArgsConstructor
 public class TodoController {
-    TodoService service;
+
+    private final TodoService todoService;
 
     @GetMapping
     public ResponseEntity<List<Todo>> getTodos() {
-        return new ResponseEntity<>(service.getAllTodos(), HttpStatus.OK);
+        return new ResponseEntity<>(todoService.getAllTodos(), HttpStatus.OK);
     }
 
     @PostMapping(
@@ -31,13 +35,38 @@ public class TodoController {
     public ResponseEntity<Todo> saveTodo(@RequestParam("title") String title,
                                          @RequestParam("description") String description,
                                          @RequestParam("file") MultipartFile file) {
-        return new ResponseEntity<>(service.saveTodo(title, description, file), HttpStatus.OK);
+        return new ResponseEntity<>(todoService.saveTodo(title, description, file), HttpStatus.OK);
     }
 
     @GetMapping(value = "{id}/image/download")
     public byte[] downloadTodoImage(@PathVariable("id") Long id) throws Exception {
-        byte[] source =  service.downloadTodoImage(id);
+        byte[] source =  todoService.downloadTodoImage(id);
         return source;
+    }
+
+    @PostMapping(
+            path = "/delete-object",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Boolean> deleteObject(@RequestBody ObjectRequest objectRequest) {
+        return new ResponseEntity<>(todoService.deleteObject(objectRequest), HttpStatus.OK);
+    }
+
+    @PostMapping(
+            path = "/upload-common",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Boolean> uploadCommon(@RequestParam("bucketName") String bucketName,
+                                                @RequestParam(value = "path", required = false) String path,
+                                                @RequestParam("file") MultipartFile file) {
+        return new ResponseEntity<>(todoService.uploadCommon(bucketName, path, file), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/s3-select-object")
+    public ResponseEntity<?> s3SelectObject() throws Exception {
+        return new ResponseEntity<>(todoService.s3SelectObject(), HttpStatus.OK);
     }
 
     /*private BufferedImage convert(byte[] imageSource) throws Exception {
