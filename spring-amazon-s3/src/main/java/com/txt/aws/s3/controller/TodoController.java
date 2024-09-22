@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/todo")
+@RequestMapping("api/v1/")
 @CrossOrigin("*")
 @Tag(name = "Todo Controller")
 @RequiredArgsConstructor
@@ -22,13 +22,13 @@ public class TodoController {
 
     private final TodoService todoService;
 
-    @GetMapping
+    @GetMapping(path="todo/list")
     public ResponseEntity<List<Todo>> getTodos() {
         return new ResponseEntity<>(todoService.getAllTodos(), HttpStatus.OK);
     }
 
     @PostMapping(
-            path = "/save",
+            path = "todo/save",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -38,14 +38,14 @@ public class TodoController {
         return new ResponseEntity<>(todoService.saveTodo(title, description, file), HttpStatus.OK);
     }
 
-    @GetMapping(value = "{id}/image/download")
+    @GetMapping(value = "todo/{id}/image/download")
     public byte[] downloadTodoImage(@PathVariable("id") Long id) throws Exception {
         byte[] source =  todoService.downloadTodoImage(id);
         return source;
     }
 
     @PostMapping(
-            path = "/delete-object",
+            path = "todo/delete-object",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -54,7 +54,7 @@ public class TodoController {
     }
 
     @PostMapping(
-            path = "/upload-common",
+            path = "common/upload",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -64,7 +64,7 @@ public class TodoController {
         return new ResponseEntity<>(todoService.uploadCommon(bucketName, path, file), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/s3-select-object")
+    @GetMapping(path = "common/s3-select-object")
     public ResponseEntity<?> s3SelectObject() throws Exception {
         return new ResponseEntity<>(todoService.s3SelectObject(), HttpStatus.OK);
     }
